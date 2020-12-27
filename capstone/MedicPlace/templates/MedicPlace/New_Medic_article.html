@@ -1,0 +1,37 @@
+{% extends 'MedicPlace/layout.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h2>Please read!</h2>
+          <p>Hi this is the new article form of the page, please fill the content of the article with topics such as new treatments,advance on science,opinions on diseases, or sort of a wiki entry of a disease.</p>
+          <h5>Thank you for your support!</h5>
+        </div>
+      </div>  
+      <div class="row ">
+            <div class="col justify-content-center">
+                <form method="POST" action="{% url 'New_Article' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="title" class="font-weight-bold">Title</label>
+                      <input type="text" name="title" class="form-control form-field" id="title" placeholder="New Title">
+                    </div>
+                    <div class="form-group">
+                      <label for="textarea_content1" class="font-weight-bold">Article Content</label>
+                      <textarea class="form-control form-field" name="content" id="textarea_content1" rows="20"></textarea>
+                    </div>
+                    <div >
+                        <button type="submit" class="btn btn-outline-success">Create Article</button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

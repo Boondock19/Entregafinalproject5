@@ -1,0 +1,30 @@
+{% extends 'MedicPlace/layout.html' %}
+{% load static %}
+
+{% block body %}  
+<div class="container">
+        <div class="row ">
+            <div class="col justify-content-center">
+                <form method="POST" action="{% url 'Edit_Article' id %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="title" class="font-weight-bold">Title</label>
+                      <input type="text" name="title" class="form-control form-field" id="title" placeholder="New Title" value="{{title}}">
+                    </div>
+                    <div class="form-group">
+                      <label for="textarea_content1" class="font-weight-bold">Article Content</label>
+                      <textarea class="form-control form-field" name="content" id="textarea_content1" rows="20">{{content}}</textarea>
+                    </div>
+                    <div >
+                        <button type="submit" class="btn btn-outline-success">Save Changes</button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'MedicPlace/layout.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h2>Please read!</h2>
+          <p>Hi this is the new Medicine form of the page, please fill the content!</p>
+          <h5>Thank you for your support!</h5>
+        </div>
+      </div>  
+      <div class="row ">
+            <div class="col justify-content-center">
+                <form method="POST" action="{% url 'New_Medicine' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="name" class="font-weight-bold">Name</label>
+                      <input type="text" name="name" class="form-control form-field" id="name">
+                    </div>
+                    <div class="form-group">
+                      <label for="type" class="font-weight-bold">Type of Medicine</label>
+                      <select class="form-control" name="type" id="type">
+                        {% for e in Medicines %}
+                        <option value="{{e.id}}">{{e.Type}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="textarea_content1" class="font-weight-bold">Medicine Summary</label>
+                      <textarea class="form-control form-field" name="summary" id="textarea_content1" rows="20"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="active_ingredient" class="font-weight-bold">Active Ingredient</label>
+                      <input type="text" name="active_ingredient" class="form-control form-field" id="active_ingredient">
+                    </div>
+                    <div >
+                        <button type="submit" class="btn btn-outline-success">Create Medicine Entry</button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

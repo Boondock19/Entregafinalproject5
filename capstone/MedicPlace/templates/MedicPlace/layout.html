@@ -1,0 +1,49 @@
+{% load static  %}
+
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+        <title>MedicPlace</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+        <link rel="stylesheet" href="{% static 'MedicPlace/style.css' %}">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'index' %}">MedicPlace</a>
+          
+            <div>
+              <ul class="navbar-nav mr-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Data_Sheet' user.id %}">{{user.username}}</a>
+                </li>
+                {% if is_medic is True %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'New_Article' %}">New Article</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'New_Medicine' %}">New Medicine</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">  Logout</a>
+                </li>
+                {% else %} 
+                <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}      
+                </ul>
+            </div>
+          </nav>
+        <div class="body">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
+    {% block script %}
+    {% endblock %}
+</html>

@@ -1,0 +1,116 @@
+{% extends 'MedicPlace/layout.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col">
+                <h1 class="text-center text-capitalize font-weight-bold" id="title_article">{{title}}</h1>
+                <div class="row justify-content-end">
+                    <div class="col-sm-4 ">
+                        
+                    </div>
+                    <div class="col-sm-4 ">
+                        <textarea id="texarea_title" col="20" rows="1" class="justify-content-center">{{title}}</textarea>
+                    </div>
+                    <div class="col-sm-4 ">
+                        
+                    </div>
+                </div>
+                
+               
+                <div class="col text-center">
+                    <small class="text-capitalize font-weight-bold">From Dr: <a href="{% url 'Data_Sheet' Medic_id %}">{{Medic}}</a></small>
+                </div>  
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col">
+                <p id="content_article">{{content|linebreaks}}</p>
+                <div class="row justify-content-end">
+                    <div class="col-sm-4 ">
+                        
+                    </div>
+                    <div class="col-sm-4 ">
+                        <textarea id="textarea_content"  cols="20" >{{content|linebreaks}}</textarea> 
+                    </div>
+                    <div class="col-sm-4 ">
+                        
+                    </div>
+                </div>
+                 
+            </div>
+        </div>
+        <div class="row justify-content-end">
+            
+            {% if is_owner is True %}
+            <div class="col">
+                <a href="{% url 'Edit_Article' Article_target.id %}"><button type="button" id="edit_article" data-article_id="{{Article_target.id}}" class="btn btn-outline-warning" >Edit Article</button></a>  
+            </div>
+            <div>    
+                <form method="POST" action="{%  url 'Article' Article_target.id %}">
+                    {% csrf_token %}
+                    <input type="text" name="Delete" value="Delete" hidden>
+                    <button type="submit" id="delete_article" data-article_id="{{Article_target.id}}" class="btn btn-outline-danger" >Delete Article</button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="container-fluid">
+        <h3>Comment Section </h3>
+        <div class="row">
+            <div class="col">
+                <H4>Leave Your Comment!</H4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <form method="POST" action="{% url 'Article' Article_target.id %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <textarea class="form-control textarea_comment" name="comment" id="textarea_comment" data-article_id="{{Article_target.id}}" cols="60" rows="3"></textarea>
+                    </div>
+                    <div >
+                        <button type="submit" id="comment-btn" class="btn btn-outline-success">Comment</button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+        {% for comment in comments %}
+            <div class="row">
+                <div class="col-sm-5 comment">
+                    <div  id="user-comment" class="">
+                        <p class="font-weight-bold">{{comment.user}}</p>
+                        <hr class="hr-comment">
+                    </div>
+                    <div id="comment-content-{{comment.id}}">
+                        <p >{{comment.comment|linebreaks}}</p> 
+                    </div>
+                    <div id="edit-comment-content-{{comment.id}}">
+                        <p class="edit-comment-content"> </p>
+                    </div>
+                    <div>
+                        <form>
+                            <div class="form-group">
+                                <textarea id="comment-textarea-{{comment.id}}" class="textarea_comment_edit form-control">{{comment.comment}}</textarea>
+                            </div>
+                        </form>
+                    </div> 
+                            
+                    <hr class="hr-comment">  
+                    <div>
+                        <span id="comment-date">{{comment.Date}}</span>
+                        {% if request.user == comment.user %}<button id="edit-comment" class="btn btn-outline-dark" data-comment-id="{{comment.id}}">Edit</button>{% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+{% endblock %}
+
+
+{% block script %}
+   <script src="{% static 'MedicPlace/edit_comment.js' %}"></script>
+{% endblock %}

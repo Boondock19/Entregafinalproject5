@@ -1,0 +1,106 @@
+{% extends "MedicPlace/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="container">
+    <div class="row h-100 justify-content-center">
+        <div class="col-sm-6 ">
+            {% if message %}
+            <div>
+                <h2>{{message}}</h2>
+            </div>
+            {% endif %}
+            
+            <form action="{% url 'register' %}" method="post">
+    
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="Username" class="col-sm-2 col-form-label">Username</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="Username" id="Username" placeholder="Username">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control"  name="Email" id="inputEmail3" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="Password" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                      <input type="password" class="form-control"  name="Password" id="Password" placeholder="Password">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="Confirmation" class="col-sm-2 col-form-label">Confirm Password</label>
+                    <div class="col-sm-10">
+                      <input type="password" class="form-control" name="Confirmation" id="Confirmation" placeholder="Confirm Password">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="First_name" class="col-sm-2 col-form-label">First name</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="First_name" id="First_name" placeholder="First name">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="Last_name" class="col-sm-2 col-form-label">Last name</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="Last_name" id="Last_name" placeholder="Last name">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="age" class="col-sm-2 col-form-label">Age</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" name="age" id="age" placeholder="Age">
+                    </div>
+                  </div>
+                  <fieldset class="form-group">
+                    <div class="row">
+                      <legend class="col-form-label col-sm-2 pt-0">Are you a Dr?</legend>
+                      <div class="col-sm-10">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="is_dr" id="Yes_dr" value="Yes">
+                          <label class="form-check-label" for="Yes_dr">
+                            Yes
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="is_dr" id="No_dr" value="No">
+                          <label class="form-check-label" for="No_dr">
+                            No
+                          </label>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </fieldset>
+                  <div id="Clinic_field1" style="display: none;" class="form-group row">
+                    <label id="Clinic_field2" style="display: none;" for="Clinic" class="col-sm-2 col-form-label">Clinic</label>
+                    <div  id="Clinic_field3" style="display: none;" class="col-sm-10">
+                      <input type="text" style="display: none;" class="form-control" name="Clinic" id="Clinic_field4" placeholder="Clinic">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-10">
+                      <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+                  </div>
+            </form>
+                <div>
+                    Already have an account? <a href="{% url 'login' %}">Login</a>
+                </div>
+        </div>
+        
+    
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+{% block script %}
+<script src="{% static 'MedicPlace/register.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,63 @@
+#texarea_title {
+    display: none;
+}
+
+#textarea_content {
+    display: none;
+}
+
+#p_summary_edited {
+    display:none;
+}
+.comment {
+    margin-top: 10px;
+    border: solid 2px;
+    margin-left: 15px;
+    border-color:rgb(4, 116, 13);
+    border-radius: 25px;
+}
+
+
+hr.hr-comment {
+    overflow: visible; /* For IE */
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+}
+hr.hr-comment:after {
+    content: "§";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+}
+
+.textarea_comment {
+	border: 3px solid #cccccc;
+}
+
+.textarea_comment_edit {
+    display: none;
+	border: 3px solid #cccccc;
+}
+
+.edit-comment-content {
+    display: none;
+}
+
+.form-field {
+    border: 3px solid #cccccc;
+}
+
+.select-medicine {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.edit-medicine {
+    display: none; 
+}

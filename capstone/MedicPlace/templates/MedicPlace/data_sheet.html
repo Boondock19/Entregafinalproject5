@@ -1,0 +1,90 @@
+{% extends "MedicPlace/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    {% if message %}
+        <h2>{{message}}</h2>
+    {% endif %}
+
+    {% if Page_type == "Medic" %}
+        <div class="container">
+            <div class="row justify-content-center align-items-start">
+                <div class="col">
+                    <h2 class="text-center font-weight-bold">Data Sheet Of Doctor</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+               <div class="col-4 text-capitalize justify-content-center">
+                    <p class=" text-center text-capitalize"> <span class="font-weight-bold">First Name: </span> {{data_sheet_user.First_Name}}</p>   
+               </div>
+                <div class="col-4 text-capitalize justify-content-center">
+                        <p class="text-center text-capitalize"> <span class="font-weight-bold">Last Name: </span> {{data_sheet_user.Last_Name}}</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-4 justify-content-center">
+                   <p class="text-center text-capitalize"> <span class="font-weight-bold">Clinic: </span> {{data_sheet_user.Clinic}}</p> 
+                </div>
+                 <div class="col-4 text-capitalize justify-content-center">
+                    <p class="text-center text-capitalize"> <span class="font-weight-bold">Age: </span> {{data_sheet_user.age}}</p>
+                 </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-5 text-capitalize justify-content-center">
+                    <p class="text-center text-capitalize"> <span class="font-weight-bold">Rate: </span> <span id="Dr_rate">{{data_sheet_user.rate}}</span>
+                    <span class="font-weight-bold">Number of Rates:  </span> <span id="Num_of_rates">{{data_sheet_user.num_of_rates}}</span></p>
+                    {% if request.user != data_sheet_user.user  %}
+                    <span class="font-weight-bold">Rate the Dr, Please!</span>
+                    <button type="button" class="btn-rate btn btn-outline-secondary" id="btn-1" data-btn_id="{{data_sheet_user.id}}" data-value="1">1</button>
+                    <button type="button" class="btn-rate btn btn-outline-secondary" id="btn-2" data-btn_id="{{data_sheet_user.id}}"  data-value="2">2</button>
+                    <button type="button" class="btn-rate btn btn-outline-secondary" id="btn-3" data-btn_id="{{data_sheet_user.id}}"  data-value="3">3</button>
+                    <button type="button" class="btn-rate btn btn-outline-secondary" id="btn-4" data-btn_id="{{data_sheet_user.id}}"  data-value="4">4</button>
+                    <button type="button" class="btn-rate btn btn-outline-secondary" id="btn-5" data-btn_id="{{data_sheet_user.id}}"  data-value="5">5</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-4 justify-content-center">
+                    <br>
+                    <h2>Check This Dr Articles!:</h2>
+                    <br>
+                    <ul>
+                        {% for e in Articles %}
+                        <li><a class="text-capitalize" href="{% url 'Article' e.id  %}"><span class="text-capitalize">{{e.title}}</span></a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% elif Page_type == "Normal_User" %}
+
+        <div class="container">
+            <div class="row justify-content-center align-items-start">
+                <div class="col">
+                    <h2 class="text-center font-weight-bold">Data Sheet Of Normal User</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+               <div class="col-4 text-capitalize justify-content-center">
+                    <p class=" text-center text-capitalize"> <span class="font-weight-bold">First Name: </span> {{data_sheet_user.First_Name}}</p>   
+               </div>
+                <div class="col-4 text-capitalize justify-content-center">
+                        <p class="text-center text-capitalize"> <span class="font-weight-bold">Last Name: </span> {{data_sheet_user.Last_Name}}</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                 <div class="col-4 text-capitalize justify-content-center">
+                    <p class="text-center text-capitalize"> <span class="font-weight-bold">Age: </span> {{data_sheet_user.age}}</p>
+                 </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% endblock %}
+
+
+
+{% block script %}
+        <script src="{% static 'MedicPlace/rate.js' %}"></script>
+{% endblock %}

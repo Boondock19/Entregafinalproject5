@@ -1,0 +1,40 @@
+{% extends "MedicPlace/layout.html "%}
+{% load static %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row h-100 justify-content-start">
+        <div class="col-sm-4">
+                <h2 class="font-weight-bold" >List of Doctors</h2>
+                <ul>
+                    {% for e in Medics %}
+                        <li><a class="text-capitalize" href="{% url 'Data_Sheet' e.user.id  %}">{{e.First_Name}} {{e.Last_Name}}</a></li>
+                    {% endfor %}
+                </ul>
+        </div>
+        <div class="col-sm-4">
+            <h2 class="font-weight-bold" >Types Of Medicines</h2>
+            <ul>
+                {% for e in Medicines %}
+                    <li><a class="text-capitalize" href="{% url 'Medicine_type' e.id  %}"><span class="text-capitalize">{{e.Type}}</span></a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-sm-4">
+            <h2 class="font-weight-bold" >List of Articles</h2>
+            <ul>
+                {% for e in Articles %}
+                    <li><a class="text-capitalize" href="{% url 'Article' e.id  %}"><span class="text-capitalize">{{e.title}}</span></a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

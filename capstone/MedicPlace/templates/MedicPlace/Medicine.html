@@ -1,0 +1,61 @@
+{% extends 'MedicPlace/layout.html' %}
+
+{% load static %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 id="h1-name">{{name}}</h1>
+                <h1 id="h1_name_edited"></h1>
+                <span class="font-weight-bold">Type of Medicine: </span><p id="p-type">{{type}}</p>
+                <div>
+                   <span class="font-weight-bold">Active ingredient: </span> <p id="p-active_ingredient">{{Active_ingredient}}</p>
+                </div>
+                <div>
+                    <span class="font-weight-bold">Written by: </span> <p> Dr {{medic}}</p>
+                </div>
+                <div>
+                    <span class="font-weight-bold">Summary: </span>
+                </div>
+                <div id="p-summary">
+                    <p>{{summary|linebreaks}}</p>
+                    </div>
+                <div>
+                    <p id="p-summary-edited"></p>
+                </div>
+                <form class="edit-medicine">
+                    <div class="form-group">
+                        <label for="input-name-{{Medicine_id}}" class="font-weight-bold">Name: </label>
+                        <input id="input-name-{{Medicine_id}}" class="input_edit form-control form-field" value="{{name}}"></input>
+                    </div>
+                    <div class="form-group">
+                        <label for="type" class="font-weight-bold">Type of Medicine</label>
+                        <select class="form-control form-field select-medicine" name="type" id="input-type_medicine-{{Medicine_id}}">
+                          {% for e in Medicines %}
+                          <option id="input-type_medicine-{{e.id}}" value="{{e.id}}">{{e.Type}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    <div class="form-group">
+                        <label for="input-Active_ingredient-{{Medicine_id}}" class="font-weight-bold">Active ingredient: </label>
+                        <input id="input-Active_ingredient-{{Medicine_id}}" class="input_edit form-control form-field" value="{{Active_ingredient}}"></input>
+                    </div>
+                    <div class="form-group">
+                        <label for="textarea-{{Medicine_id}}" class="font-weight-bold">Summary: </label>
+                        <textarea id="textarea-{{Medicine_id}}" class="textarea_edit form-control form-field">{{summary}}</textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-end">
+            <div class="col justify-content-end">
+            {% if request.user == Medicine_medic_user %}    <button data-Medicine-id="{{Medicine_id}}" id="edit-btn" class="btn btn-outline-warning">Edit Entry</button> {% endif  %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'MedicPlace/edit_medicine.js' %}"></script>
+{% endblock %}
